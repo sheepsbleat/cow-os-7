@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Switch, Route, Link } from "react-router-dom";
+import Home from "./components/pages/Home";
+import { Typography, AppBar, Toolbar } from "@material-ui/core";
+import CowClicker from "./components/pages/apps/CowClicker";
+import CowTalk from "./components/pages/CowTalk";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar position="sticky" className="nav">
+        <Toolbar>
+          <Link to="/">
+            <Typography variant="h6">Home</Typography>
+          </Link>
+        </Toolbar>
+      </AppBar>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/cow-clicker" component={CowClicker} />
+        <Route path="/chat" component={CowTalk} />
+        <Route
+          render={() => (
+            <Typography
+              style={{ textAlign: "center" }}
+              variant="h2"
+              gutterBottom
+            >
+              Moo! (404 page not found)
+            </Typography>
+          )}
+        />
+      </Switch>
     </div>
   );
 }
